@@ -1,0 +1,67 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: ResumeTry - Serverless Backend API
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Runtime: python3.11
+    Environment:
+      Variables:
+        LOG_LEVEL: INFO
+
+Resources:
+  # API Gateway
+  ResumeTryApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Cors:
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+
+  # Health Check Lambda
+  HealthCheckFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.handler
+      CodeUri: backend/health/
+      Events:
+        HealthCheck:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ResumeTryApi
+            Path: /health
+            Method: GET
+
+  # Example: Resume Processing Lambda
+  ProcessResumeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.handler
+      CodeUri: backend/resume/
+      Events:
+        ProcessResume:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ResumeTryApi
+            Path: /api/resume
+            Method: POST
+        GetResume:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ResumeTryApi
+            Path: /api/resume/{id}
+            Method: GET
+
+Outputs:
+  ResumeTryApi:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ResumeTryApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
+  ResumeTryApiId:
+    Description: "API Gateway ID"
+    Value: !Ref ResumeTryApi
+

@@ -1,0 +1,13 @@
+{
+  "httpMethod": "POST",
+  "path": "/api/resume",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"resume\": \"base64-encoded-resume-content\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "stage": "dev"
+  }
+}
+
