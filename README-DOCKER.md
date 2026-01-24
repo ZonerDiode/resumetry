@@ -5,7 +5,6 @@ This project is containerized using Docker and Docker Compose.
 ## Prerequisites
 
 - Docker Desktop (or Docker Engine + Docker Compose)
-- At least 2GB of available disk space
 
 ## Quick Start
 

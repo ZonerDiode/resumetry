@@ -1,3 +1,0 @@
-# No external dependencies required for health check
-# Add dependencies here as needed
-

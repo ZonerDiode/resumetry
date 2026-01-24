@@ -12,20 +12,6 @@ services:
     networks:
       - resumetry-network
 
-  # Uncomment and configure when backend is ready
-  # backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   container_name: resumetry-backend
-  #   restart: unless-stopped
-  #   networks:
-  #     - resumetry-network
-  #   environment:
-  #     - NODE_ENV=production
-
 networks:
   resumetry-network:
     driver: bridge
