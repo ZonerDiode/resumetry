@@ -2,3 +2,66 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: ResumeTry - Serverless Backend API
 
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Runtime: python3.11
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+
+Resources:
+  BackendApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub resumetry-api-${Environment}
+      StageName: !Ref Environment
+      EndpointConfiguration:
+        Type: REGIONAL
+      Cors:
+        AllowOrigin: "'*'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+        AllowHeaders: "'Content-Type,Authorization'"
+
+  BackendFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub resumetry-backend-${Environment}
+      CodeUri: backend/
+      Handler: app.main.handler
+      Description: ResumeTry FastAPI Backend
+      Environment:
+        Variables:
+          RESUMETRY_DEBUG: !If [IsDev, 'true', 'false']
+          RESUMETRY_CORS_ORIGINS: '["*"]'
+      Events:
+        ApiRoot:
+          Type: Api
+          Properties:
+            RestApiId: !Ref BackendApi
+            Path: /
+            Method: ANY
+        ApiProxy:
+          Type: Api
+          Properties:
+            RestApiId: !Ref BackendApi
+            Path: /{proxy+}
+            Method: ANY
+
+Conditions:
+  IsDev: !Equals [!Ref Environment, 'dev']
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub https://${BackendApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/
+  FunctionArn:
+    Description: Backend Lambda Function ARN
+    Value: !GetAtt BackendFunction.Arn

@@ -9,10 +9,32 @@ services:
       - "4200:80"
     container_name: resumetry-frontend
     restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - resumetry-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: resumetry-backend
+    restart: unless-stopped
+    environment:
+      - RESUMETRY_DEBUG=true
+      - RESUMETRY_CORS_ORIGINS=["http://localhost:4200","http://localhost:3000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     networks:
       - resumetry-network
 
 networks:
   resumetry-network:
     driver: bridge
-
