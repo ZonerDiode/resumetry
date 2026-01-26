@@ -1,0 +1,114 @@
+<div class="detail-container">
+  @if (isLoading()) {
+    <div class="loading">Loading...</div>
+  }
+
+  @if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn btn-secondary" (click)="onBack()">Back to List</button>
+    </div>
+  }
+
+  @if (application(); as app) {
+    <div class="detail-header">
+      <div>
+        <h1>{{ app.company }}</h1>
+        <p class="role">{{ app.role }}</p>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="btn btn-primary" (click)="onEdit()">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="onBack()">Back</button>
+      </div>
+    </div>
+
+    <div class="detail-content">
+      <div class="info-section">
+        <h3>Application Information</h3>
+
+        <div class="info-row">
+          <span class="label">Status:</span>
+          <span
+            class="status-badge"
+            [style.background-color]="getStatusColor(app.status)"
+          >
+            {{ app.status }}
+          </span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Interest Level:</span>
+          <span class="value">{{ app.interestLevel }} / 3</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Applied Date:</span>
+          <span class="value">{{ formatDate(app.appliedDate) }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Status Date:</span>
+          <span class="value">{{ formatDate(app.statusDate) }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Salary:</span>
+          <span class="value">{{ app.salary || 'Not specified' }}</span>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Additional Details</h3>
+
+        @if (app.description) {
+          <div class="info-row">
+            <span class="label">Description:</span>
+            <span class="value">{{ app.description }}</span>
+          </div>
+        }
+
+        @if (app.sourcePage) {
+          <div class="info-row">
+            <span class="label">Source:</span>
+            <a [href]="app.sourcePage" target="_blank" rel="noopener noreferrer" class="link">{{ app.sourcePage }}</a>
+          </div>
+        }
+
+        @if (app.reviewPage) {
+          <div class="info-row">
+            <span class="label">Reviews:</span>
+            <a [href]="app.reviewPage" target="_blank" rel="noopener noreferrer" class="link">{{ app.reviewPage }}</a>
+          </div>
+        }
+
+        @if (app.loginHints) {
+          <div class="info-row">
+            <span class="label">Login Hints:</span>
+            <span class="value">{{ app.loginHints }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="notes-section">
+      <h3>Notes ({{ app.notes.length }})</h3>
+
+      @if (app.notes.length === 0) {
+        <p class="empty-notes">No notes yet. Click Edit to add notes.</p>
+      } @else {
+        <div class="notes-list">
+          @for (note of app.notes; track $index) {
+            <div class="note-item">
+              <div class="note-header">
+                <span class="note-date">{{ formatDate(note.occurDate) }}</span>
+              </div>
+              <p class="note-description">{{ note.description }}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

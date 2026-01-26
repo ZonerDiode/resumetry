@@ -1,0 +1,216 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Edit Application' : 'New Application' }}</h1>
+
+  <form [formGroup]="applicationForm" (ngSubmit)="onSave()">
+    <!-- Basic Information Section -->
+    <div class="form-section">
+      <h2>Basic Information</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="company">Company *</label>
+          <input
+            type="text"
+            id="company"
+            formControlName="company"
+            class="form-control"
+            [class.invalid]="isFieldInvalid('company')"
+          />
+          @if (isFieldInvalid('company')) {
+            <span class="error-text">Company is required</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role *</label>
+          <input
+            type="text"
+            id="role"
+            formControlName="role"
+            class="form-control"
+            [class.invalid]="isFieldInvalid('role')"
+          />
+          @if (isFieldInvalid('role')) {
+            <span class="error-text">Role is required</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="salary">Salary</label>
+          <input
+            type="text"
+            id="salary"
+            formControlName="salary"
+            class="form-control"
+            placeholder="e.g., $80,000 - $100,000"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="interestLevel">Interest Level *</label>
+          <select
+            id="interestLevel"
+            formControlName="interestLevel"
+            class="form-control"
+          >
+            <option [value]="1">1 - Low</option>
+            <option [value]="2">2 - Medium</option>
+            <option [value]="3">3 - High</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status & Dates Section -->
+    <div class="form-section">
+      <h2>Status & Dates</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="status">Status *</label>
+          <select
+            id="status"
+            formControlName="status"
+            class="form-control"
+          >
+            @for (status of statusOptions; track status) {
+              <option [value]="status">{{ status }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="appliedDate">Applied Date *</label>
+          <input
+            type="date"
+            id="appliedDate"
+            formControlName="appliedDate"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="statusDate">Status Date *</label>
+          <input
+            type="date"
+            id="statusDate"
+            formControlName="statusDate"
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Links Section -->
+    <div class="form-section">
+      <h2>Additional Information</h2>
+
+      <div class="form-group">
+        <label for="sourcePage">Source Page URL</label>
+        <input
+          type="url"
+          id="sourcePage"
+          formControlName="sourcePage"
+          class="form-control"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="reviewPage">Review Page URL</label>
+        <input
+          type="url"
+          id="reviewPage"
+          formControlName="reviewPage"
+          class="form-control"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="loginHints">Login Hints</label>
+        <textarea
+          id="loginHints"
+          formControlName="loginHints"
+          class="form-control"
+          rows="2"
+          placeholder="Notes about accessing the company portal..."
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Notes Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <h2>Notes ({{ notesArray.length }})</h2>
+        <button type="button" class="btn btn-secondary" (click)="addNote()">+ Add Note</button>
+      </div>
+
+      @if (notesArray.length === 0) {
+        <p class="empty-notes">No notes yet. Click "Add Note" to create one.</p>
+      } @else {
+        <div formArrayName="notes" class="notes-list">
+          @for (note of notesArray.controls; let i = $index; track i) {
+            <div [formGroupName]="i" class="note-item">
+              <div class="note-header">
+                <span class="note-number">Note {{ i + 1 }}</span>
+                <button type="button" class="btn-remove" (click)="removeNote(i)">
+                  Remove
+                </button>
+              </div>
+
+              <div class="note-fields">
+                <div class="form-group">
+                  <label [for]="'note-' + i + '-occurDate'">Date</label>
+                  <input type="date" [id]="'note-' + i + '-occurDate'" formControlName="occurDate" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                  <label [for]="'note-' + i + '-description'">Description</label>
+                  <textarea
+                    [id]="'note-' + i + '-description'"
+                    formControlName="description"
+                    class="form-control"
+                    rows="2"
+                    placeholder="What happened on this date..."
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="isSaving"
+      >
+        {{ isSaving ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="onCancel()"
+        [disabled]="isSaving"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

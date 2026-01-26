@@ -16,36 +16,6 @@ ResumeTry is an Angular 17 web application with a FastAPI serverless backend usi
 - Reinforce knowledge of Python, Angular, AWS. 
 - Learn about frameworks FastAPI, and Pydantic.
 
-## Build & Development Commands
-
-### Frontend (from `frontend/` directory)
-```bash
-npm install              # Install dependencies
-npm start                # Dev server at http://localhost:4200
-npm run build            # Production build to dist/resumetry
-npm run watch            # Continuous build for development
-npm test                 # Run Karma tests in Chrome
-```
-
-### Backend (from `backend/` directory)
-```bash
-pip install -r requirements.txt  # Install dependencies
-uvicorn app.main:app --reload    # Dev server at http://localhost:8000
-```
-
-### Docker
-```bash
-docker-compose up -d     # Start all services
-docker-compose down      # Stop all services
-```
-
-### AWS SAM
-```bash
-sam build                # Build SAM template
-sam local start-api      # Local API at port 3000
-sam deploy               # Deploy to AWS
-```
-
 ## Architecture
 
 - **Frontend**: Angular 17 with standalone components (no NgModules)

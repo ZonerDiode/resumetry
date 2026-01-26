@@ -1,0 +1,70 @@
+<div class="applications-container">
+  <div class="filter-bar">
+    <div>
+      <h1>Job Applications</h1>
+      <p class="subtitle">Showing {{ displayedApplications().length }} most recent applications</p>
+    </div>
+
+    <div class="filter-actions">
+      <input
+        type="text"
+        class="filter-input"
+        placeholder="Filter by company..."
+        (input)="onFilterChange($event)"
+        [value]="filterText()"
+      />
+      <button type="button" class="btn btn-primary" (click)="onCreateNew()">+ New Application</button>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading">Loading applications...</div>
+  }
+
+  @if (error()) {
+    <div class="error">{{ error() }}</div>
+  }
+
+  @if (!isLoading() && !error()) {
+    @if (displayedApplications().length === 0) {
+      <div class="empty-state">
+        <p>No applications found.</p>
+        <button type="button" class="btn btn-primary" (click)="onCreateNew()">Create Your First Application</button>
+      </div>
+    } @else {
+      <div class="applications-grid">
+        @for (app of displayedApplications(); track app.id) {
+          <div class="application-card" (click)="onSelectApplication(app)" (keydown.enter)="onSelectApplication(app)" tabindex="0" role="button">
+            <div class="card-header">
+              <h2 class="company-name">{{ app.company }}</h2>
+              <span
+                class="interest-badge"
+                [style.background-color]="getInterestColor(app.interestLevel)"
+              >
+                Interest: {{ app.interestLevel }}/3
+              </span>
+            </div>
+
+            <div class="card-body">
+              <p class="role">{{ app.role }}</p>
+              <p class="salary">{{ app.salary || 'Salary not specified' }}</p>
+              <p class="date">Applied: {{ formatDate(app.appliedDate) }}</p>
+            </div>
+
+            <div class="card-footer">
+              <span
+                class="status-badge"
+                [style.background-color]="getStatusColor(app.status)"
+              >
+                {{ app.status }}
+              </span>
+              @if (app.notes.length > 0) {
+                <span class="notes-count">{{ app.notes.length }} note(s)</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

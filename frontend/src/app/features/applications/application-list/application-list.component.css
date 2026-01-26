@@ -1,0 +1,159 @@
+.applications-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-bar h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-width: 250px;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.application-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.application-card:hover,
+.application-card:focus {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.company-name {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.interest-badge {
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.card-body {
+  margin-bottom: 1rem;
+}
+
+.role {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.salary {
+  margin: 0 0 0.5rem 0;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.date {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+}
+
+.notes-count {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.loading,
+.error,
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #f44336;
+}
+
+.empty-state {
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.empty-state p {
+  margin-bottom: 1.5rem;
+  color: #666;
+}
