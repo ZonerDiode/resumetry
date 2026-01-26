@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobApplicationService } from '../../../core/services/job-application.service';
@@ -7,7 +7,7 @@ import { ApplicationStatus } from '../../../core/models/application-status.enum'
 
 @Component({
     selector: 'app-application-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './application-form.component.html',
     styleUrl: './application-form.component.css'
 })

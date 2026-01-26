@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobApplicationService } from '../../../core/services/job-application.service';
 import { JobApplication } from '../../../core/models/job-application.model';
@@ -7,7 +7,7 @@ import { ApplicationStatus } from '../../../core/models/application-status.enum'
 
 @Component({
     selector: 'app-application-detail',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './application-detail.component.html',
     styleUrl: './application-detail.component.css'
 })

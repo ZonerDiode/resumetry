@@ -9,23 +9,31 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ResumeTry is an Angular 19 web application with a FastAPI serverless backend using Pydantic for model validation to handle API requests.
+ResumeTry is an Angular 20 web application with a FastAPI serverless backend using Pydantic for model validation to handle API requests.
 
 - Track Job Applications that are submitted to companies.
 - Track Notes about things that happen to Job Applications.
 
 ## Architecture
 
-- **Frontend**: Angular 19 with standalone components (no NgModules)
+- **Frontend**: Angular 20 with standalone components (no NgModules)
 - **Backend**: AWS Lambda hosting FastAPI with Pydantic for handling API requests
 - **Deployment**: Multi-stage Docker build with Nginx for production serving
 
 ### Frontend Structure
 ```
 frontend/src/app/
-├── app.component.ts     # Root component
-├── app.routes.ts        # Standalone routing (currently empty)
-└── main.ts              # Bootstrap with provideRouter
+├── app.component.ts          # Root component
+├── app.routes.ts             # Route definitions (provideRouter)
+├── main.ts                   # Bootstrap with bootstrapApplication()
+├── core/
+│   ├── models/               # Interfaces, enums, type definitions
+│   └── services/             # Injectable services (HttpClient, signals)
+└── features/
+    └── applications/         # Job application feature components
+        ├── application-list/
+        ├── application-detail/
+        └── application-form/
 ```
 
 ### Backend Structure
@@ -55,6 +63,47 @@ backend/app/
 - API docs at /api/docs (Swagger UI)
 - CORS configured via RESUMETRY_CORS_ORIGINS env var
 - Nginx proxies /api/ to backend:8000
+
+## Angular 20 Conventions
+
+### Component Architecture
+- All components are standalone by default (Angular 20 no longer requires `standalone: true`)
+- No NgModules — use `bootstrapApplication()` with provider functions in `main.ts`
+- Use `imports: [...]` directly in `@Component` metadata for dependencies (e.g., `ReactiveFormsModule`, `RouterOutlet`)
+
+### Dependency Injection
+- Use the `inject()` function instead of constructor injection
+- Example: `private readonly service = inject(JobApplicationService);`
+
+### Signals & Reactivity (Stable in Angular 20)
+- Use `signal()` for component state (e.g., `isLoading = signal(true)`)
+- Use `computed()` for derived state that auto-updates when dependencies change
+- Use `.set()` and `.update()` to modify signals
+- Read signal values with `()` syntax in both templates and TypeScript (e.g., `isLoading()`)
+- `linkedSignal()`, `effect()`, signal-based queries, and signal-based inputs are all stable — use when appropriate
+- Signal-based forms are still experimental — continue using `ReactiveFormsModule` for forms
+
+### Template Syntax
+- Use built-in control flow: `@if`, `@else`, `@for`, `@switch`, `@case`, `@default`
+- Do NOT use structural directives (`*ngIf`, `*ngFor`, `*ngSwitch`) — these are deprecated in Angular 20
+- Use `track` with `@for` loops (e.g., `@for (item of items; track item.id)`)
+- Template local variable binding: `@if (value(); as alias)` to alias signal reads
+- `@defer` / `@placeholder` blocks available for lazy loading sections of templates
+
+### HTTP & Routing
+- Use `provideHttpClient(withFetch())` in providers (not `HttpClientModule`)
+- Use `provideRouter(routes)` for routing (not `RouterModule`)
+- Routes defined as a `const Routes` array exported from `app.routes.ts`
+
+### Testing
+- Currently using Karma + Jasmine (Karma is deprecated in Angular 20)
+- Angular 20 introduces experimental support for alternative test runners (Vitest, Web Test Runner)
+
+### TypeScript
+- TypeScript 5.9 — use modern syntax and features
+- Target: ES2022
+- Module resolution: `bundler`
+- Strict template checking enabled (`strictTemplates`, `strictInjectionParameters`, `strictInputAccessModifiers`)
 
 ## Code Style
 
