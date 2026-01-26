@@ -30,14 +30,17 @@ export class ApplicationFormComponent implements OnInit {
     description: [''],
     salary: ['', Validators.maxLength(100)],
     interestLevel: [2, [Validators.required, Validators.min(1), Validators.max(3)]],
-    status: [ApplicationStatus.APPLIED, Validators.required],
     sourcePage: [''],
     reviewPage: [''],
     loginHints: [''],
     appliedDate: [this.todayString(), Validators.required],
-    statusDate: [this.todayString(), Validators.required],
+    status: this.fb.array([]),
     notes: this.fb.array([])
   });
+
+  get statusArray(): FormArray {
+    return this.applicationForm.get('status') as FormArray;
+  }
 
   get notesArray(): FormArray {
     return this.applicationForm.get('notes') as FormArray;
@@ -50,6 +53,9 @@ export class ApplicationFormComponent implements OnInit {
 
     if (this.isEditMode && id) {
       this.loadApplication(id);
+    } else {
+      // Auto-populate with APPLIED status for new applications
+      this.addStatusItem(this.todayString(), ApplicationStatus.APPLIED);
     }
   }
 
@@ -62,12 +68,15 @@ export class ApplicationFormComponent implements OnInit {
           description: app.description,
           salary: app.salary,
           interestLevel: app.interestLevel,
-          status: app.status,
           sourcePage: app.sourcePage,
           reviewPage: app.reviewPage,
           loginHints: app.loginHints,
-          appliedDate: app.appliedDate,
-          statusDate: app.statusDate
+          appliedDate: app.appliedDate
+        });
+
+        // Load status items
+        app.status.forEach(item => {
+          this.addStatusItem(item.occurDate, item.status);
         });
 
         // Load notes
@@ -84,6 +93,19 @@ export class ApplicationFormComponent implements OnInit {
         this.router.navigate(['/applications']);
       }
     });
+  }
+
+  addStatusItem(occurDate?: string, status?: ApplicationStatus): void {
+    this.statusArray.push(this.fb.group({
+      occurDate: [occurDate ?? this.todayString(), Validators.required],
+      status: [status ?? ApplicationStatus.APPLIED, Validators.required]
+    }));
+  }
+
+  removeStatusItem(index: number): void {
+    if (confirm('Remove this status entry?')) {
+      this.statusArray.removeAt(index);
+    }
   }
 
   addNote(): void {

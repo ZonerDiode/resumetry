@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JobApplicationService } from '../../../core/services/job-application.service';
 import { JobApplication } from '../../../core/models/job-application.model';
 import { ApplicationStatus } from '../../../core/models/application-status.enum';
+import { StatusItem } from '../../../core/models/status-item.model';
 
 @Component({
   selector: 'app-application-list',
@@ -68,6 +69,10 @@ export class ApplicationListComponent implements OnInit {
   onFilterChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.filterText.set(input.value);
+  }
+
+  getLatestStatus(app: JobApplication): StatusItem | null {
+    return app.status.at(-1) ?? null;
   }
 
   getStatusColor(status: ApplicationStatus): string {

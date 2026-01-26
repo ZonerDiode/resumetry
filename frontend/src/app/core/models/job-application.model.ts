@@ -1,5 +1,5 @@
-import { ApplicationStatus } from './application-status.enum';
 import { ApplicationNote } from './application-note.model';
+import { StatusItem } from './status-item.model';
 
 type JobApplicationInterestLevel = 1 | 2 | 3;
 
@@ -10,12 +10,11 @@ export interface JobApplication {
   description: string;
   salary: string;
   interestLevel: JobApplicationInterestLevel;
-  status: ApplicationStatus;
+  status: StatusItem[];
   sourcePage: string;
   reviewPage: string;
   loginHints: string;
   appliedDate: string;
-  statusDate: string;
   notes: ApplicationNote[];
 }
 
@@ -25,12 +24,11 @@ export interface JobApplicationCreate {
   description?: string;
   salary?: string;
   interestLevel: JobApplicationInterestLevel;
-  status?: ApplicationStatus;
+  status?: StatusItem[];
   sourcePage?: string;
   reviewPage?: string;
   loginHints?: string;
   appliedDate?: string;
-  statusDate?: string;
   notes?: ApplicationNote[];
 }
 
@@ -40,8 +38,7 @@ export interface JobApplicationUpdate {
   description?: string;
   salary?: string;
   interestLevel?: JobApplicationInterestLevel;
-  status?: ApplicationStatus;
-  statusDate?: string;
+  status?: StatusItem[];
   sourcePage?: string;
   reviewPage?: string;
   loginHints?: string;

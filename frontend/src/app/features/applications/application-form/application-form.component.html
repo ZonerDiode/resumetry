@@ -73,24 +73,11 @@
       </div>
     </div>
 
-    <!-- Status & Dates Section -->
+    <!-- Dates Section -->
     <div class="form-section">
-      <h2>Status & Dates</h2>
+      <h2>Dates</h2>
 
       <div class="form-row">
-        <div class="form-group">
-          <label for="status">Status *</label>
-          <select
-            id="status"
-            formControlName="status"
-            class="form-control"
-          >
-            @for (status of statusOptions; track status) {
-              <option [value]="status">{{ status }}</option>
-            }
-          </select>
-        </div>
-
         <div class="form-group">
           <label for="appliedDate">Applied Date *</label>
           <input
@@ -100,17 +87,48 @@
             class="form-control"
           />
         </div>
-
-        <div class="form-group">
-          <label for="statusDate">Status Date *</label>
-          <input
-            type="date"
-            id="statusDate"
-            formControlName="statusDate"
-            class="form-control"
-          />
-        </div>
       </div>
+    </div>
+
+    <!-- Status History Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <h2>Status History ({{ statusArray.length }})</h2>
+        <button type="button" class="btn btn-secondary" (click)="addStatusItem()">+ Add Status</button>
+      </div>
+
+      @if (statusArray.length === 0) {
+        <p class="empty-notes">No status entries. Click "Add Status" to create one.</p>
+      } @else {
+        <div formArrayName="status" class="notes-list">
+          @for (item of statusArray.controls; let i = $index; track i) {
+            <div [formGroupName]="i" class="note-item">
+              <div class="note-header">
+                <span class="note-number">Status {{ i + 1 }}</span>
+                <button type="button" class="btn-remove" (click)="removeStatusItem(i)">
+                  Remove
+                </button>
+              </div>
+
+              <div class="note-fields">
+                <div class="form-group">
+                  <label [for]="'status-' + i + '-occurDate'">Date</label>
+                  <input type="date" [id]="'status-' + i + '-occurDate'" formControlName="occurDate" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                  <label [for]="'status-' + i + '-status'">Status</label>
+                  <select [id]="'status-' + i + '-status'" formControlName="status" class="form-control">
+                    @for (status of statusOptions; track status) {
+                      <option [value]="status">{{ status }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
     </div>
 
     <!-- Additional Links Section -->

@@ -52,12 +52,16 @@
             </div>
 
             <div class="card-footer">
-              <span
-                class="status-badge"
-                [style.background-color]="getStatusColor(app.status)"
-              >
-                {{ app.status }}
-              </span>
+              @if (getLatestStatus(app); as latest) {
+                <span
+                  class="status-badge"
+                  [style.background-color]="getStatusColor(latest.status)"
+                >
+                  {{ latest.status }}
+                </span>
+              } @else {
+                <span class="status-badge" style="background-color: #9e9e9e">No Status</span>
+              }
               @if (app.notes.length > 0) {
                 <span class="notes-count">{{ app.notes.length }} note(s)</span>
               }

@@ -13,6 +13,12 @@ class ApplicationNote(BaseSchema):
     description: str = Field(..., min_length=1)
 
 
+class StatusItem(BaseSchema):
+    """A status change entry associated with a job application."""
+    occur_date: date
+    status: ApplicationStatus
+
+
 class JobApplicationBase(BaseSchema):
     """Base schema with common job application fields."""
     company: str = Field(..., min_length=1, max_length=255)
@@ -20,7 +26,6 @@ class JobApplicationBase(BaseSchema):
     description: str = Field(default='')
     salary: str = Field(default='', max_length=100)
     interest_level: int = Field(..., ge=1, le=3)
-    status: ApplicationStatus = Field(default=ApplicationStatus.APPLIED)
     source_page: str = Field(default='')
     review_page: str = Field(default='')
     login_hints: str = Field(default='')
@@ -29,7 +34,7 @@ class JobApplicationBase(BaseSchema):
 class JobApplicationCreate(JobApplicationBase):
     """Schema for creating a new job application."""
     applied_date: date = Field(default_factory=date.today)
-    status_date: date = Field(default_factory=date.today)
+    status: list[StatusItem] = Field(default_factory=lambda: [])
     notes: list[ApplicationNote] = Field(default_factory=lambda: [])
 
 
@@ -40,11 +45,10 @@ class JobApplicationUpdate(BaseSchema):
     description: Optional[str] = None
     salary: Optional[str] = Field(None, max_length=100)
     interest_level: Optional[int] = Field(None, ge=1, le=3)
-    status: Optional[ApplicationStatus] = None
-    status_date: Optional[date] = None
     source_page: Optional[str] = None
     review_page: Optional[str] = None
     login_hints: Optional[str] = None
+    status: Optional[list[StatusItem]] = None
     notes: Optional[list[ApplicationNote]] = None
 
 
@@ -52,6 +56,6 @@ class JobApplicationResponse(JobApplicationBase):
     """Schema for API responses."""
     id: str
     applied_date: date
-    status_date: date
+    status: list[StatusItem] = Field(default_factory=lambda: [])
     notes: list[ApplicationNote] = Field(default_factory=lambda: [])
 
