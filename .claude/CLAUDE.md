@@ -2,9 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Environment
+- This is a Windows system without bash/WSL
+- Use PowerShell for all terminal commands
+- Use Windows-style paths (C:\Dev\...)
+
 ## Project Overview
 
 ResumeTry is an Angular 17 web application with a FastAPI serverless backend using Pydantic for model validation to handle API requests.
+
+- Track Job Applications that are submitted to companies.
+- Track Notes about things that happen to Job Applications.
+- Reinforce knowledge of Python, Angular, AWS. 
+- Learn about frameworks FastAPI, and Pydantic.
 
 ## Build & Development Commands
 
@@ -58,9 +68,13 @@ backend/app/
 ├── routers/
 │   ├── health.py        # GET /health
 │   └── api_v1.py        # GET /api/v1/ping
-└── models/
-    ├── base.py          # Base Pydantic schema
-    └── responses.py     # Response models
+├── models/
+│   ├── base.py          # Base Pydantic schema
+│   ├── responses.py     # Response models
+│   ├── enums.py         # ApplicationStatus enum
+│   └── job_application.py  # Job application models
+└── db/
+    └── dynamodb.py      # DynamoDB client and table setup
 ```
 
 ### Key Configuration - Frontend
