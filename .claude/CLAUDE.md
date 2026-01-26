@@ -9,14 +9,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ResumeTry is an Angular 18 web application with a FastAPI serverless backend using Pydantic for model validation to handle API requests.
+ResumeTry is an Angular 19 web application with a FastAPI serverless backend using Pydantic for model validation to handle API requests.
 
 - Track Job Applications that are submitted to companies.
 - Track Notes about things that happen to Job Applications.
 
 ## Architecture
 
-- **Frontend**: Angular 18 with standalone components (no NgModules)
+- **Frontend**: Angular 19 with standalone components (no NgModules)
 - **Backend**: AWS Lambda hosting FastAPI with Pydantic for handling API requests
 - **Deployment**: Multi-stage Docker build with Nginx for production serving
 

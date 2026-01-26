@@ -6,11 +6,10 @@ import { JobApplication } from '../../../core/models/job-application.model';
 import { ApplicationStatus } from '../../../core/models/application-status.enum';
 
 @Component({
-  selector: 'app-application-detail',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './application-detail.component.html',
-  styleUrl: './application-detail.component.css'
+    selector: 'app-application-detail',
+    imports: [CommonModule],
+    templateUrl: './application-detail.component.html',
+    styleUrl: './application-detail.component.css'
 })
 export class ApplicationDetailComponent implements OnInit {
   private readonly service = inject(JobApplicationService);

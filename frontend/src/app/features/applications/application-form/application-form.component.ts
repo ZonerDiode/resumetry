@@ -6,11 +6,10 @@ import { JobApplicationService } from '../../../core/services/job-application.se
 import { ApplicationStatus } from '../../../core/models/application-status.enum';
 
 @Component({
-  selector: 'app-application-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './application-form.component.html',
-  styleUrl: './application-form.component.css'
+    selector: 'app-application-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './application-form.component.html',
+    styleUrl: './application-form.component.css'
 })
 export class ApplicationFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);

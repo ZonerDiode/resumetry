@@ -7,11 +7,10 @@ import { ApplicationStatus } from '../../../core/models/application-status.enum'
 import { StatusItem } from '../../../core/models/status-item.model';
 
 @Component({
-  selector: 'app-application-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './application-list.component.html',
-  styleUrl: './application-list.component.css'
+    selector: 'app-application-list',
+    imports: [CommonModule],
+    templateUrl: './application-list.component.html',
+    styleUrl: './application-list.component.css'
 })
 export class ApplicationListComponent implements OnInit {
   private readonly service = inject(JobApplicationService);
