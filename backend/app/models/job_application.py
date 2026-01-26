@@ -30,7 +30,7 @@ class JobApplicationCreate(JobApplicationBase):
     """Schema for creating a new job application."""
     applied_date: date = Field(default_factory=date.today)
     status_date: date = Field(default_factory=date.today)
-    notes: list[ApplicationNote] = Field(default_factory=list)
+    notes: list[ApplicationNote] = Field(default_factory=lambda: [])
 
 
 class JobApplicationUpdate(BaseSchema):
@@ -53,4 +53,5 @@ class JobApplicationResponse(JobApplicationBase):
     id: str
     applied_date: date
     status_date: date
-    notes: list[ApplicationNote] = Field(default_factory=list)
+    notes: list[ApplicationNote] = Field(default_factory=lambda: [])
+

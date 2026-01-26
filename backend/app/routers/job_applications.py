@@ -18,7 +18,7 @@ router = APIRouter(
     response_model=JobApplicationResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def create_application(data: JobApplicationCreate):
+def create_application(data: JobApplicationCreate) -> JobApplicationResponse:
     return svc.create_application(data)
 
 
@@ -26,7 +26,7 @@ def create_application(data: JobApplicationCreate):
     '',
     response_model=list[JobApplicationResponse],
 )
-def list_applications():
+def list_applications() -> list[JobApplicationResponse]:
     return svc.list_applications()
 
 
@@ -34,7 +34,7 @@ def list_applications():
     '/{app_id}',
     response_model=JobApplicationResponse,
 )
-def get_application(app_id: str):
+def get_application(app_id: str) -> JobApplicationResponse | None:
     app = svc.get_application(app_id)
     if app is None:
         raise HTTPException(
@@ -48,7 +48,7 @@ def get_application(app_id: str):
     '/{app_id}',
     response_model=JobApplicationResponse,
 )
-def update_application(app_id: str, data: JobApplicationUpdate):
+def update_application(app_id: str, data: JobApplicationUpdate) -> JobApplicationResponse:
     app = svc.update_application(app_id, data)
     if app is None:
         raise HTTPException(

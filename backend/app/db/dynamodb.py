@@ -1,10 +1,11 @@
 import boto3
 from botocore.exceptions import ClientError
+from mypy_boto3_dynamodb.service_resource import DynamoDBServiceResource, Table
 
 from app.config import settings
 
 
-def get_dynamodb_resource():
+def get_dynamodb_resource() -> DynamoDBServiceResource:
     """Get DynamoDB resource, configured for local or AWS."""
     kwargs = {
         'region_name': settings.dynamodb_region,
@@ -18,13 +19,13 @@ def get_dynamodb_resource():
     return boto3.resource('dynamodb', **kwargs)
 
 
-def get_table():
+def get_table() -> Table:
     """Get the job applications table."""
     dynamodb = get_dynamodb_resource()
     return dynamodb.Table(settings.dynamodb_table)
 
 
-def create_table_if_not_exists():
+def create_table_if_not_exists() -> Table:
     """Create the job applications table if it doesn't exist."""
     dynamodb = get_dynamodb_resource()
 
@@ -33,7 +34,7 @@ def create_table_if_not_exists():
         table.load()
         return table
     except ClientError as e:
-        if e.response['Error']['Code'] != 'ResourceNotFoundException':
+        if e.response.get('Error', {}).get('Code') != 'ResourceNotFoundException':
             raise
 
     # Table doesn't exist, create it

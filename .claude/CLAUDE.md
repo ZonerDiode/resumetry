@@ -100,3 +100,5 @@ backend/app/
 - 4-space indentation (Python standard)
 - Single quotes for strings
 - Type hints encouraged
+- Always use fully parameterized types (e.g., `dict[str, Any]`, `list[str]`) instead of bare `dict` or `list` to avoid Pylance `reportUnknownMemberType` errors
+- use datetime.now() instead of datetime.utcnow()
