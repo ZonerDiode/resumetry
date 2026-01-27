@@ -51,7 +51,7 @@
           <p class="empty-notes">No status history.</p>
         } @else {
           <div class="notes-list">
-            @for (item of app.status; track $index) {
+            @for (item of sortedStatus(app.status); track $index) {
               <div class="note-item">
                 <div class="note-header">
                   <span class="note-date">{{ formatDate(item.occurDate) }}</span>
@@ -72,9 +72,9 @@
         <h3>Additional Details</h3>
 
         @if (app.description) {
-          <div class="info-row">
+          <div class="description-block">
             <span class="label">Description:</span>
-            <span class="value">{{ app.description }}</span>
+            <div class="description-text" [innerHTML]="app.description"></div>
           </div>
         }
 
@@ -108,7 +108,7 @@
         <p class="empty-notes">No notes yet. Click Edit to add notes.</p>
       } @else {
         <div class="notes-list">
-          @for (note of app.notes; track $index) {
+          @for (note of sortedNotes(app.notes); track $index) {
             <div class="note-item">
               <div class="note-header">
                 <span class="note-date">{{ formatDate(note.occurDate) }}</span>

@@ -4,10 +4,11 @@ import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobApplicationService } from '../../../core/services/job-application.service';
 import { ApplicationStatus } from '../../../core/models/application-status.enum';
+import { ContentEditableDirective } from '../../../core/directives/content-editable.directive';
 
 @Component({
     selector: 'app-application-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, ContentEditableDirective],
     templateUrl: './application-form.component.html',
     styleUrl: './application-form.component.css'
 })

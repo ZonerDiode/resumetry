@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(npx ng build)",
+      "Bash(powershell -Command \"cd ''c:\\\\Dev\\\\resumetry\\\\frontend''; npx ng build 2>&1 | Select-Object -Last 30\")",
+      "Bash(powershell -Command \"cd ''c:\\\\Dev\\\\resumetry\\\\frontend''; npx ng build 2>&1 | Select-Object -Last 20\")",
+      "Bash(powershell -Command:*)"
     ]
   }
 }

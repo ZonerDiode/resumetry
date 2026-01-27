@@ -1,4 +1,4 @@
-# Docker Setup for ResumeTry
+# Docker Setup for Resumetry
 
 This project is containerized using Docker and Docker Compose.
 
@@ -21,7 +21,9 @@ docker-compose logs -f
 docker-compose down
 ```
 
-The frontend will be available at: http://localhost:4200
+Resumetry frontend will be available at: http://localhost:4200
+Swagger for the FastAPI is available at: http://localhost:8000/api/docs
+DynamoDB admin page is available at:http://localhost:8002
 
 ### Build Individual Images
 
@@ -53,18 +55,3 @@ The Dockerfile uses a multi-stage build:
 2. **Production stage**: Serves the built application using nginx
 
 This results in a smaller, optimized production image.
-
-## Adding a Backend
-
-When you're ready to add a backend service:
-
-1. Create a `backend/Dockerfile`
-2. Uncomment the backend service in `docker-compose.yml`
-3. Configure the backend service as needed
-
-## Troubleshooting
-
-- **Port already in use**: Change the port mapping in `docker-compose.yml` (e.g., `"8080:80"`)
-- **Build fails**: Ensure you have enough disk space and memory allocated to Docker
-- **Container won't start**: Check logs with `docker-compose logs frontend`
-

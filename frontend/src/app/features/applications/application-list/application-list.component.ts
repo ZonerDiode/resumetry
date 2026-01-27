@@ -17,6 +17,7 @@ export class ApplicationListComponent implements OnInit {
   private readonly router = inject(Router);
 
   filterText = signal('');
+  viewMode = signal<'card' | 'table'>('table');
   isLoading = signal(true);
   error = signal<string | null>(null);
 
@@ -35,8 +36,7 @@ export class ApplicationListComponent implements OnInit {
       new Date(b.appliedDate).getTime() - new Date(a.appliedDate).getTime()
     );
 
-    // Limit to 20 items
-    return apps.slice(0, 20);
+    return apps;
   });
 
   ngOnInit(): void {
@@ -71,7 +71,10 @@ export class ApplicationListComponent implements OnInit {
   }
 
   getLatestStatus(app: JobApplication): StatusItem | null {
-    return app.status.at(-1) ?? null;
+    if (app.status.length === 0) return null;
+    return [...app.status].sort((a, b) =>
+      new Date(b.occurDate).getTime() - new Date(a.occurDate).getTime()
+    )[0];
   }
 
   getStatusColor(status: ApplicationStatus): string {

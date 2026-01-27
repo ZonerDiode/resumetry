@@ -38,12 +38,13 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea
+        <div
           id="description"
+          appContentEditable
           formControlName="description"
-          class="form-control"
-          rows="3"
-        ></textarea>
+          class="form-control content-editable"
+          contenteditable="true"
+        ></div>
       </div>
 
       <div class="form-row">

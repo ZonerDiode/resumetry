@@ -76,6 +76,46 @@
   border-color: #f44336;
 }
 
+/* ContentEditable description field */
+.content-editable {
+  min-height: 15rem;
+  max-height: 30rem;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  cursor: text;
+  line-height: 1.6;
+}
+
+.content-editable:empty::before {
+  content: 'Paste or type the job description...';
+  color: #999;
+  pointer-events: none;
+}
+
+.content-editable h1,
+.content-editable h2,
+.content-editable h3,
+.content-editable h4,
+.content-editable h5,
+.content-editable h6 {
+  margin: 0.75rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.content-editable p { margin: 0.25rem 0; }
+
+.content-editable ul,
+.content-editable ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.content-editable li { margin-bottom: 0.25rem; }
+.content-editable a { color: #1976d2; text-decoration: underline; }
+
 .error-text {
   display: block;
   margin-top: 0.25rem;

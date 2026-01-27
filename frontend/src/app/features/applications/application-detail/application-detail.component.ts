@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JobApplicationService } from '../../../core/services/job-application.service';
 import { JobApplication } from '../../../core/models/job-application.model';
 import { ApplicationStatus } from '../../../core/models/application-status.enum';
+import { StatusItem } from '../../../core/models/status-item.model';
+import { ApplicationNote } from '../../../core/models/application-note.model';
 
 @Component({
     selector: 'app-application-detail',
@@ -79,6 +81,18 @@ export class ApplicationDetailComponent implements OnInit {
       [ApplicationStatus.GHOSTED]: '#9e9e9e'
     };
     return colors[status];
+  }
+
+  sortedStatus(status: StatusItem[]): StatusItem[] {
+    return [...status].sort((a, b) =>
+      new Date(a.occurDate).getTime() - new Date(b.occurDate).getTime()
+    );
+  }
+
+  sortedNotes(notes: ApplicationNote[]): ApplicationNote[] {
+    return [...notes].sort((a, b) =>
+      new Date(a.occurDate).getTime() - new Date(b.occurDate).getTime()
+    );
   }
 
   formatDate(dateString: string): string {

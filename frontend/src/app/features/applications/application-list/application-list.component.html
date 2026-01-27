@@ -6,6 +6,36 @@
     </div>
 
     <div class="filter-actions">
+      <div class="view-toggle">
+        <button
+          type="button"
+          class="toggle-btn"
+          [class.active]="viewMode() === 'table'"
+          (click)="viewMode.set('table')"
+          title="Table view"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+            <rect x="1" y="1" width="16" height="3" rx="0.5"/>
+            <rect x="1" y="5.5" width="16" height="3" rx="0.5"/>
+            <rect x="1" y="10" width="16" height="3" rx="0.5"/>
+            <rect x="1" y="14.5" width="16" height="3" rx="0.5"/>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="toggle-btn"
+          [class.active]="viewMode() === 'card'"
+          (click)="viewMode.set('card')"
+          title="Card view"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+            <rect x="1" y="1" width="7" height="7" rx="1"/>
+            <rect x="10" y="1" width="7" height="7" rx="1"/>
+            <rect x="1" y="10" width="7" height="7" rx="1"/>
+            <rect x="10" y="10" width="7" height="7" rx="1"/>
+          </svg>
+        </button>
+      </div>
       <input
         type="text"
         class="filter-input"
@@ -32,43 +62,82 @@
         <button type="button" class="btn btn-primary" (click)="onCreateNew()">Create Your First Application</button>
       </div>
     } @else {
-      <div class="applications-grid">
-        @for (app of displayedApplications(); track app.id) {
-          <div class="application-card" (click)="onSelectApplication(app)" (keydown.enter)="onSelectApplication(app)" tabindex="0" role="button">
-            <div class="card-header">
-              <h2 class="company-name">{{ app.company }}</h2>
-              <span
-                class="interest-badge"
-                [style.background-color]="getInterestColor(app.interestLevel)"
-              >
-                Interest: {{ app.interestLevel }}/3
-              </span>
-            </div>
-
-            <div class="card-body">
-              <p class="role">{{ app.role }}</p>
-              <p class="salary">{{ app.salary || 'Salary not specified' }}</p>
-              <p class="date">Applied: {{ formatDate(app.appliedDate) }}</p>
-            </div>
-
-            <div class="card-footer">
-              @if (getLatestStatus(app); as latest) {
+      @if (viewMode() === 'table') {
+        <table class="applications-table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Salary</th>
+              <th>Applied</th>
+              <th>Interest</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (app of displayedApplications(); track app.id) {
+              <tr class="table-row" (click)="onSelectApplication(app)" (keydown.enter)="onSelectApplication(app)" tabindex="0" role="button">
+                <td class="col-company">{{ app.company }}</td>
+                <td>{{ app.role }}</td>
+                <td class="col-salary">{{ app.salary || '—' }}</td>
+                <td>{{ formatDate(app.appliedDate) }}</td>
+                <td>
+                  <span class="interest-badge" [style.background-color]="getInterestColor(app.interestLevel)">
+                    {{ app.interestLevel }}/3
+                  </span>
+                </td>
+                <td>
+                  @if (getLatestStatus(app); as latest) {
+                    <span class="status-badge" [style.background-color]="getStatusColor(latest.status)">
+                      {{ latest.status }}
+                    </span>
+                  } @else {
+                    <span class="status-badge" style="background-color: #9e9e9e">N/A</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <div class="applications-grid">
+          @for (app of displayedApplications(); track app.id) {
+            <div class="application-card" (click)="onSelectApplication(app)" (keydown.enter)="onSelectApplication(app)" tabindex="0" role="button">
+              <div class="card-header">
+                <h2 class="company-name">{{ app.company }}</h2>
                 <span
-                  class="status-badge"
-                  [style.background-color]="getStatusColor(latest.status)"
+                  class="interest-badge"
+                  [style.background-color]="getInterestColor(app.interestLevel)"
                 >
-                  {{ latest.status }}
+                  Interest: {{ app.interestLevel }}/3
                 </span>
-              } @else {
-                <span class="status-badge" style="background-color: #9e9e9e">No Status</span>
-              }
-              @if (app.notes.length > 0) {
-                <span class="notes-count">{{ app.notes.length }} note(s)</span>
-              }
+              </div>
+
+              <div class="card-body">
+                <p class="role">{{ app.role }}</p>
+                <p class="salary">{{ app.salary || 'Salary not specified' }}</p>
+                <p class="date">Applied: {{ formatDate(app.appliedDate) }}</p>
+              </div>
+
+              <div class="card-footer">
+                @if (getLatestStatus(app); as latest) {
+                  <span
+                    class="status-badge"
+                    [style.background-color]="getStatusColor(latest.status)"
+                  >
+                    {{ latest.status }}
+                  </span>
+                } @else {
+                  <span class="status-badge" style="background-color: #9e9e9e">No Status</span>
+                }
+                @if (app.notes.length > 0) {
+                  <span class="notes-count">{{ app.notes.length }} note(s)</span>
+                }
+              </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      }
     }
   }
 </div>

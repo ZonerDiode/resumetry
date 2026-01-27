@@ -43,6 +43,14 @@
   border-radius: 8px;
 }
 
+.info-section:last-child {
+  grid-column: 1 / -1;
+}
+
+.info-section .notes-list { gap: 0.5rem; }
+.info-section .note-item { padding: 0.5rem; }
+.info-section .note-header { margin-bottom: 0; }
+
 .info-section h3 {
   margin-top: 0;
   margin-bottom: 1.5rem;
@@ -73,6 +81,41 @@
   text-align: right;
   word-break: break-word;
 }
+
+.description-block {
+  margin-bottom: 1rem;
+}
+
+.description-text {
+  margin: 0.5rem 0 0 0;
+  white-space: pre-line;
+  line-height: 1.6;
+  color: #333;
+}
+
+.description-text h1,
+.description-text h2,
+.description-text h3,
+.description-text h4,
+.description-text h5,
+.description-text h6 {
+  margin: 0.75rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.description-text p { margin: 0.25rem 0; }
+
+.description-text ul,
+.description-text ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.description-text li { margin-bottom: 0.25rem; }
+.description-text strong, .description-text b { font-weight: 600; }
+.description-text a { color: #1976d2; text-decoration: underline; }
 
 .link {
   color: #1976d2;
