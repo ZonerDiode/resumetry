@@ -36,18 +36,18 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <div
-          id="description"
-          appContentEditable
-          formControlName="description"
-          class="form-control content-editable"
-          contenteditable="true"
-        ></div>
-      </div>
-
       <div class="form-row">
+
+        <div class="form-group">
+          <label for="appliedDate">Applied Date *</label>
+          <input
+            type="date"
+            id="appliedDate"
+            formControlName="appliedDate"
+            class="form-control"
+          />
+        </div>
+
         <div class="form-group">
           <label for="salary">Salary</label>
           <input
@@ -74,62 +74,92 @@
       </div>
     </div>
 
-    <!-- Dates Section -->
-    <div class="form-section">
-      <h2>Dates</h2>
+    <div class="detail-content">
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="appliedDate">Applied Date *</label>
-          <input
-            type="date"
-            id="appliedDate"
-            formControlName="appliedDate"
-            class="form-control"
-          />
+      <!-- Status History Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <h2>Status History ({{ statusArray.length }})</h2>
+          <button type="button" class="btn btn-secondary" (click)="addStatusItem()">+ Add Status</button>
         </div>
-      </div>
-    </div>
 
-    <!-- Status History Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <h2>Status History ({{ statusArray.length }})</h2>
-        <button type="button" class="btn btn-secondary" (click)="addStatusItem()">+ Add Status</button>
-      </div>
-
-      @if (statusArray.length === 0) {
-        <p class="empty-notes">No status entries. Click "Add Status" to create one.</p>
-      } @else {
-        <div formArrayName="status" class="notes-list">
-          @for (item of statusArray.controls; let i = $index; track i) {
-            <div [formGroupName]="i" class="note-item">
-              <div class="note-header">
-                <span class="note-number">Status {{ i + 1 }}</span>
-                <button type="button" class="btn-remove" (click)="removeStatusItem(i)">
-                  Remove
-                </button>
-              </div>
-
-              <div class="note-fields">
-                <div class="form-group">
-                  <label [for]="'status-' + i + '-occurDate'">Date</label>
-                  <input type="date" [id]="'status-' + i + '-occurDate'" formControlName="occurDate" class="form-control"/>
+        @if (statusArray.length === 0) {
+          <p class="empty-notes">No status entries. Click "Add Status" to create one.</p>
+        } @else {
+          <div formArrayName="status" class="notes-list">
+            @for (item of statusArray.controls; let i = $index; track i) {
+              <div [formGroupName]="i" class="note-item">
+                <div class="note-header">
+                  <span class="note-number">Status {{ i + 1 }}</span>
+                  <button type="button" class="btn-remove" (click)="removeStatusItem(i)">
+                    Remove
+                  </button>
                 </div>
 
-                <div class="form-group">
-                  <label [for]="'status-' + i + '-status'">Status</label>
-                  <select [id]="'status-' + i + '-status'" formControlName="status" class="form-control">
-                    @for (status of statusOptions; track status) {
-                      <option [value]="status">{{ status }}</option>
-                    }
-                  </select>
+                <div class="note-fields">
+                  <div class="form-group">
+                    <label [for]="'status-' + i + '-occurDate'">Date</label>
+                    <input type="date" [id]="'status-' + i + '-occurDate'" formControlName="occurDate" class="form-control"/>
+                  </div>
+
+                  <div class="form-group">
+                    <label [for]="'status-' + i + '-status'">Status</label>
+                    <select [id]="'status-' + i + '-status'" formControlName="status" class="form-control">
+                      @for (status of statusOptions; track status) {
+                        <option [value]="status">{{ status }}</option>
+                      }
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
-          }
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Notes Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <h2>Notes ({{ notesArray.length }})</h2>
+          <button type="button" class="btn btn-secondary" (click)="addNote()">+ Add Note</button>
         </div>
-      }
+
+        @if (notesArray.length === 0) {
+          <p class="empty-notes">No notes yet. Click "Add Note" to create one.</p>
+        } @else {
+          <div formArrayName="notes" class="notes-list">
+            @for (note of notesArray.controls; let i = $index; track i) {
+              <div [formGroupName]="i" class="note-item">
+                <div class="note-header">
+                  <span class="note-number">Note {{ i + 1 }}</span>
+                  <button type="button" class="btn-remove" (click)="removeNote(i)">
+                    Remove
+                  </button>
+                </div>
+
+                <div class="note-fields">
+                  <div class="form-group">
+                    <label [for]="'note-' + i + '-occurDate'">Date</label>
+                    <input type="date" [id]="'note-' + i + '-occurDate'" formControlName="occurDate" class="form-control"/>
+                  </div>
+
+                  <div class="form-group">
+                    <label [for]="'note-' + i + '-description'">Description</label>
+                    <textarea
+                      [id]="'note-' + i + '-description'"
+                      formControlName="description"
+                      class="form-control"
+                      rows="2"
+                      placeholder="What happened on this date..."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
     </div>
 
     <!-- Additional Links Section -->
@@ -168,49 +198,17 @@
           placeholder="Notes about accessing the company portal..."
         ></textarea>
       </div>
-    </div>
 
-    <!-- Notes Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <h2>Notes ({{ notesArray.length }})</h2>
-        <button type="button" class="btn btn-secondary" (click)="addNote()">+ Add Note</button>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <div
+          id="description"
+          appContentEditable
+          formControlName="description"
+          class="form-control content-editable"
+          contenteditable="true"
+        ></div>
       </div>
-
-      @if (notesArray.length === 0) {
-        <p class="empty-notes">No notes yet. Click "Add Note" to create one.</p>
-      } @else {
-        <div formArrayName="notes" class="notes-list">
-          @for (note of notesArray.controls; let i = $index; track i) {
-            <div [formGroupName]="i" class="note-item">
-              <div class="note-header">
-                <span class="note-number">Note {{ i + 1 }}</span>
-                <button type="button" class="btn-remove" (click)="removeNote(i)">
-                  Remove
-                </button>
-              </div>
-
-              <div class="note-fields">
-                <div class="form-group">
-                  <label [for]="'note-' + i + '-occurDate'">Date</label>
-                  <input type="date" [id]="'note-' + i + '-occurDate'" formControlName="occurDate" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                  <label [for]="'note-' + i + '-description'">Description</label>
-                  <textarea
-                    [id]="'note-' + i + '-description'"
-                    formControlName="description"
-                    class="form-control"
-                    rows="2"
-                    placeholder="What happened on this date..."
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-      }
     </div>
 
     <!-- Form Actions -->

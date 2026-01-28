@@ -71,13 +71,6 @@
       <div class="info-section">
         <h3>Additional Details</h3>
 
-        @if (app.description) {
-          <div class="description-block">
-            <span class="label">Description:</span>
-            <div class="description-text" [innerHTML]="app.description"></div>
-          </div>
-        }
-
         @if (app.sourcePage) {
           <div class="info-row">
             <span class="label">Source:</span>
@@ -87,7 +80,7 @@
 
         @if (app.reviewPage) {
           <div class="info-row">
-            <span class="label">Reviews:</span>
+            <span class="label">Review:</span>
             <a [href]="app.reviewPage" target="_blank" rel="noopener noreferrer" class="link">{{ app.reviewPage }}</a>
           </div>
         }
@@ -98,26 +91,36 @@
             <span class="value">{{ app.loginHints }}</span>
           </div>
         }
+
+        @if (app.description) {
+          <div class="description-block">
+            <span class="label">Description:</span>
+            <div class="description-text" [innerHTML]="app.description"></div>
+          </div>
+        }
+
       </div>
-    </div>
 
-    <div class="notes-section">
-      <h3>Notes ({{ app.notes.length }})</h3>
+      <div class="info-section">
+        <h3>Notes ({{ app.notes.length }})</h3>
 
-      @if (app.notes.length === 0) {
-        <p class="empty-notes">No notes yet. Click Edit to add notes.</p>
-      } @else {
-        <div class="notes-list">
-          @for (note of sortedNotes(app.notes); track $index) {
-            <div class="note-item">
-              <div class="note-header">
-                <span class="note-date">{{ formatDate(note.occurDate) }}</span>
+        @if (app.notes.length === 0) {
+          <p class="empty-notes">No notes yet. Click Edit to add notes.</p>
+        } @else {
+          <div class="notes-list">
+            @for (note of sortedNotes(app.notes); track $index) {
+              <div class="note-item">
+                <div class="note-header">
+                  <span class="note-date">{{ formatDate(note.occurDate) }}</span>
+                </div>
+                <p class="note-description">{{ note.description }}</p>
               </div>
-              <p class="note-description">{{ note.description }}</p>
-            </div>
-          }
-        </div>
-      }
+            }
+          </div>
+        }
+      </div>
+
     </div>
+
   }
 </div>

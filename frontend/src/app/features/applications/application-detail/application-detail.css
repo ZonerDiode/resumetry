@@ -1,5 +1,5 @@
 .detail-container {
-  max-width: 1000px;
+  max-width: 95%;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -41,10 +41,6 @@
   background: #f5f5f5;
   padding: 1.5rem;
   border-radius: 8px;
-}
-
-.info-section:last-child {
-  grid-column: 1 / -1;
 }
 
 .info-section .notes-list { gap: 0.5rem; }
@@ -136,19 +132,6 @@
   color: white;
 }
 
-.notes-section {
-  background: white;
-  border: 1px solid #e0e0e0;
-  padding: 2rem;
-  border-radius: 8px;
-}
-
-.notes-section h3 {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
 .empty-notes {
   color: #999;
   text-align: center;
@@ -162,7 +145,7 @@
 }
 
 .note-item {
-  background: #f9f9f9;
+  background: white;
   padding: 1rem;
   border-left: 3px solid #1976d2;
   border-radius: 4px;

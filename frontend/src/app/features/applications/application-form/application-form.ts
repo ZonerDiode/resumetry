@@ -78,6 +78,7 @@ export class ApplicationFormComponent implements OnInit {
         app.status.forEach(item => {
           this.addStatusItem(item.occurDate, item.status);
         });
+        this.sortFormArray(this.statusArray, 'occurDate');
 
         // Load notes
         app.notes.forEach(note => {
@@ -86,6 +87,7 @@ export class ApplicationFormComponent implements OnInit {
             description: [note.description, Validators.required]
           }));
         });
+        this.sortFormArray(this.notesArray, 'occurDate');
       },
       error: (err) => {
         alert('Failed to load application');
@@ -171,6 +173,19 @@ export class ApplicationFormComponent implements OnInit {
   private todayString(): string {
     return new Date().toISOString().split('T')[0];
   }
+  
+  private sortFormArray(formArray: FormArray, field: string): void {
+    const controls = formArray.controls.slice();
+    controls.sort((a, b) => {
+      const aVal = a.get(field)?.value ?? '';
+      const bVal = b.get(field)?.value ?? '';
+      return aVal.localeCompare(bVal);
+    });
+    
+    formArray.clear();
+    controls.forEach(c => formArray.push(c));
+  }
+
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.applicationForm.get(fieldName);
