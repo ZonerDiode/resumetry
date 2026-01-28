@@ -9,8 +9,8 @@ import { StatusItem } from '../../../core/models/status-item.model';
 @Component({
     selector: 'app-application-list',
     imports: [],
-    templateUrl: './application-list.component.html',
-    styleUrl: './application-list.component.css'
+    templateUrl: './application-list.html',
+    styleUrl: './application-list.css'
 })
 export class ApplicationListComponent implements OnInit {
   private readonly service = inject(JobApplicationService);

@@ -10,8 +10,8 @@ import { ApplicationNote } from '../../../core/models/application-note.model';
 @Component({
     selector: 'app-application-detail',
     imports: [],
-    templateUrl: './application-detail.component.html',
-    styleUrl: './application-detail.component.css'
+    templateUrl: './application-detail.html',
+    styleUrl: './application-detail.css'
 })
 export class ApplicationDetailComponent implements OnInit {
   private readonly service = inject(JobApplicationService);
@@ -61,7 +61,7 @@ export class ApplicationDetailComponent implements OnInit {
     const app = this.application();
     if (app && confirm(`Delete application for ${app.company}?`)) {
       this.service.deleteApplication(app.id).subscribe({
-        next: () => this.router.navigate(['/applications']),
+        next: () => {this.router.navigate(['/applications']);},
         error: (err) => {
           alert('Failed to delete application');
           console.error(err);

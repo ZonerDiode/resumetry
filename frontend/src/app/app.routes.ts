@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { ApplicationListComponent } from './features/applications/application-list/application-list.component';
-import { ApplicationDetailComponent } from './features/applications/application-detail/application-detail.component';
-import { ApplicationFormComponent } from './features/applications/application-form/application-form.component';
+import { ApplicationListComponent } from './features/applications/application-list/application-list';
+import { ApplicationDetailComponent } from './features/applications/application-detail/application-detail';
+import { ApplicationFormComponent } from './features/applications/application-form/application-form';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/applications', pathMatch: 'full' },

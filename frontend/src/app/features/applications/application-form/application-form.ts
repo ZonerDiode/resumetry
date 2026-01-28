@@ -9,8 +9,8 @@ import { ContentEditableDirective } from '../../../core/directives/content-edita
 @Component({
     selector: 'app-application-form',
     imports: [ReactiveFormsModule, ContentEditableDirective],
-    templateUrl: './application-form.component.html',
-    styleUrl: './application-form.component.css'
+    templateUrl: './application-form.html',
+    styleUrl: './application-form.css'
 })
 export class ApplicationFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
