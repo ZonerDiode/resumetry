@@ -117,6 +117,12 @@
                 <p class="role">{{ app.role }}</p>
                 <p class="salary">{{ app.salary || 'Salary not specified' }}</p>
                 <p class="date">Applied: {{ formatDate(app.appliedDate) }}</p>
+                @if (app.recruiterName) {
+                  <p class="recruiter">Recruiter: {{ app.recruiterName }}</p>
+                }
+                @if (app.recruiterCompany) {
+                  <p class="recruiter">Recruiter Company: {{ app.recruiterCompany }}</p>
+                }
               </div>
 
               <div class="card-footer">

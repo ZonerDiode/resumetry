@@ -33,6 +33,8 @@ export class ApplicationFormComponent implements OnInit {
     sourcePage: [''],
     reviewPage: [''],
     loginHints: [''],
+    recruiterName: [''],
+    recruiterCompany: [''],
     appliedDate: [this.todayString(), Validators.required],
     status: this.fb.array([]),
     notes: this.fb.array([])
@@ -71,6 +73,8 @@ export class ApplicationFormComponent implements OnInit {
           sourcePage: app.sourcePage,
           reviewPage: app.reviewPage,
           loginHints: app.loginHints,
+          recruiterName: app.recruiterName,
+          recruiterCompany: app.recruiterCompany,
           appliedDate: app.appliedDate
         });
 

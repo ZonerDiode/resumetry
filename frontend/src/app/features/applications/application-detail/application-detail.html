@@ -42,6 +42,20 @@
           <span class="label">Salary:</span>
           <span class="value">{{ app.salary || 'Not specified' }}</span>
         </div>
+
+        @if (app.recruiterName) {
+          <div class="info-row">
+            <span class="label">Recruiter Name:</span>
+            <span class="value">{{ app.recruiterName }}</span>
+          </div>
+        }
+
+        @if (app.recruiterCompany) {
+          <div class="info-row">
+            <span class="label">Recruiter Company:</span>
+            <span class="value">{{ app.recruiterCompany }}</span>
+          </div>
+        }
       </div>
 
       <div class="info-section">

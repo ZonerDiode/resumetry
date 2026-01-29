@@ -14,6 +14,8 @@ export interface JobApplication {
   sourcePage: string;
   reviewPage: string;
   loginHints: string;
+  recruiterName: string;
+  recruiterCompany: string;
   appliedDate: string;
   notes: ApplicationNote[];
 }
@@ -28,6 +30,8 @@ export interface JobApplicationCreate {
   sourcePage?: string;
   reviewPage?: string;
   loginHints?: string;
+  recruiterName?: string;
+  recruiterCompany?: string;
   appliedDate?: string;
   notes?: ApplicationNote[];
 }
@@ -42,5 +46,7 @@ export interface JobApplicationUpdate {
   sourcePage?: string;
   reviewPage?: string;
   loginHints?: string;
+  recruiterName?: string;
+  recruiterCompany?: string;
   notes?: ApplicationNote[];
 }

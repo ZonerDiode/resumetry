@@ -29,6 +29,8 @@ class JobApplicationBase(BaseSchema):
     source_page: str = Field(default='')
     review_page: str = Field(default='')
     login_hints: str = Field(default='')
+    recruiter_name: str = Field(default='', max_length=255)
+    recruiter_company: str = Field(default='', max_length=255)
 
 
 class JobApplicationCreate(JobApplicationBase):
@@ -48,6 +50,8 @@ class JobApplicationUpdate(BaseSchema):
     source_page: Optional[str] = None
     review_page: Optional[str] = None
     login_hints: Optional[str] = None
+    recruiter_name: Optional[str] = Field(None, max_length=255)
+    recruiter_company: Optional[str] = Field(None, max_length=255)
     status: Optional[list[StatusItem]] = None
     notes: Optional[list[ApplicationNote]] = None
 
