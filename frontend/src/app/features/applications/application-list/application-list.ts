@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobApplicationService } from '../../../core/services/job-application.service';
 import { JobApplication } from '../../../core/models/job-application.model';
+import { ApplicationNote } from '../../../core/models/application-note.model';
 import { ApplicationStatus } from '../../../core/models/application-status.enum';
 import { StatusItem } from '../../../core/models/status-item.model';
 
@@ -17,7 +18,7 @@ export class ApplicationListComponent implements OnInit {
   private readonly router = inject(Router);
 
   filterText = signal('');
-  viewMode = signal<'card' | 'table'>('table');
+  viewMode = signal<'table' | 'card' | 'recruiter'>('table');
   isLoading = signal(true);
   error = signal<string | null>(null);
 
@@ -92,6 +93,16 @@ export class ApplicationListComponent implements OnInit {
 
   getInterestColor(level: number): string {
     return level === 3 ? '#4caf50' : level === 2 ? '#ff9800' : '#9e9e9e';
+  }
+
+  recruiterApplications = computed(() => {
+    return this.displayedApplications().filter(app => !!app.recruiterName);
+  });
+
+  sortedNotes(notes: ApplicationNote[]): ApplicationNote[] {
+    return [...notes].sort((a, b) =>
+      new Date(a.occurDate).getTime() - new Date(b.occurDate).getTime()
+    );
   }
 
   formatDate(dateString: string): string {

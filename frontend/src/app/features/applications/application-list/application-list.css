@@ -168,6 +168,70 @@
 .table-row { cursor: pointer; }
 .table-row:hover, .table-row:focus { background: #e3f2fd; outline: none; }
 
+/* Recruiter view */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.recruiter-table { border-collapse: separate; border-spacing: 0 0.75rem; }
+
+.recruiter-group { cursor: pointer; }
+.recruiter-group:hover td, .recruiter-group:focus td { background: #e3f2fd; }
+
+.recruiter-row td {
+  background: #f5f5f5;
+  padding: 0.5rem 1rem;
+  border-bottom: none;
+  font-weight: 600;
+}
+
+.recruiter-name { color: #333; margin-right: 1.5rem; }
+
+.recruiter-company { color: #666; font-weight: 400; }
+
+.data-row td {
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  border-bottom: none;
+  color: #333;
+  background: white;
+}
+
+.notes-row td {
+  padding: 0.25rem 1rem 0.5rem;
+  border-bottom: none;
+  background: white;
+}
+
+.recruiter-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.recruiter-note {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.recruiter-note .note-date {
+  color: #888;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.recruiter-note .note-text { color: #555; }
+
 /* Shared states */
 .loading, .error, .empty-state {
   text-align: center;
