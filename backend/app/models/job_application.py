@@ -25,7 +25,7 @@ class JobApplicationBase(BaseSchema):
     role: str = Field(..., min_length=1, max_length=255)
     description: str = Field(default='')
     salary: str = Field(default='', max_length=100)
-    interest_level: int = Field(..., ge=1, le=3)
+    top_job: bool = Field(default=False)
     source_page: str = Field(default='')
     review_page: str = Field(default='')
     login_hints: str = Field(default='')
@@ -46,7 +46,7 @@ class JobApplicationUpdate(BaseSchema):
     role: Optional[str] = Field(None, min_length=1, max_length=255)
     description: Optional[str] = None
     salary: Optional[str] = Field(None, max_length=100)
-    interest_level: Optional[int] = Field(None, ge=1, le=3)
+    top_job: Optional[bool] = None
     source_page: Optional[str] = None
     review_page: Optional[str] = None
     login_hints: Optional[str] = None

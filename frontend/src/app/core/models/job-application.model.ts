@@ -1,15 +1,13 @@
 import { ApplicationNote } from './application-note.model';
 import { StatusItem } from './status-item.model';
 
-type JobApplicationInterestLevel = 1 | 2 | 3;
-
 export interface JobApplication {
   id: string;
   company: string;
   role: string;
   description: string;
   salary: string;
-  interestLevel: JobApplicationInterestLevel;
+  topJob: boolean;
   status: StatusItem[];
   sourcePage: string;
   reviewPage: string;
@@ -25,7 +23,7 @@ export interface JobApplicationCreate {
   role: string;
   description?: string;
   salary?: string;
-  interestLevel: JobApplicationInterestLevel;
+  topJob: boolean;
   status?: StatusItem[];
   sourcePage?: string;
   reviewPage?: string;
@@ -41,7 +39,7 @@ export interface JobApplicationUpdate {
   role?: string;
   description?: string;
   salary?: string;
-  interestLevel?: JobApplicationInterestLevel;
+  topJob?: boolean;
   status?: StatusItem[];
   sourcePage?: string;
   reviewPage?: string;

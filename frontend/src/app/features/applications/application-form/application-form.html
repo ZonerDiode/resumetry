@@ -37,6 +37,30 @@
       </div>
 
       <div class="form-row">
+        <div class="form-group">
+          <label for="recruiterName">Recruiter Name</label>
+          <input
+            type="text"
+            id="recruiterName"
+            formControlName="recruiterName"
+            class="form-control"
+            placeholder="e.g., Jane Smith"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="recruiterCompany">Recruiter Company</label>
+          <input
+            type="text"
+            id="recruiterCompany"
+            formControlName="recruiterCompany"
+            class="form-control"
+            placeholder="e.g., Acme Recruiting"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
 
         <div class="form-group">
           <label for="appliedDate">Applied Date *</label>
@@ -59,41 +83,15 @@
           />
         </div>
 
-        <div class="form-group">
-          <label for="interestLevel">Interest Level *</label>
-          <select
-            id="interestLevel"
-            formControlName="interestLevel"
-            class="form-control"
-          >
-            <option [value]="1">1 - Low</option>
-            <option [value]="2">2 - Medium</option>
-            <option [value]="3">3 - High</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="recruiterName">Recruiter Name</label>
-          <input
-            type="text"
-            id="recruiterName"
-            formControlName="recruiterName"
-            class="form-control"
-            placeholder="e.g., Jane Smith"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="recruiterCompany">Recruiter Company</label>
-          <input
-            type="text"
-            id="recruiterCompany"
-            formControlName="recruiterCompany"
-            class="form-control"
-            placeholder="e.g., Acme Recruiting"
-          />
+        <div class="form-group form-group-checkbox">
+          <label for="topJob">
+            <input
+              type="checkbox"
+              id="topJob"
+              formControlName="topJob"
+            />
+            Mark as Top Job
+          </label>
         </div>
       </div>
     </div>

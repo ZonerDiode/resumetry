@@ -28,10 +28,12 @@
       <div class="info-section">
         <h3>Application Information</h3>
 
-        <div class="info-row">
-          <span class="label">Interest Level:</span>
-          <span class="value">{{ app.interestLevel }} / 3</span>
-        </div>
+        @if (app.topJob) {
+          <div class="info-row">
+            <span class="label">Top Job:</span>
+            <span class="value top-job-star">&#9733;</span>
+          </div>
+        }
 
         <div class="info-row">
           <span class="label">Applied Date:</span>

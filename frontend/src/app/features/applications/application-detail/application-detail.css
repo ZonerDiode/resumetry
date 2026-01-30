@@ -78,6 +78,11 @@
   word-break: break-word;
 }
 
+.top-job-star {
+  color: #DAA520;
+  font-size: 1.25rem;
+}
+
 .description-block {
   margin-bottom: 1rem;
 }

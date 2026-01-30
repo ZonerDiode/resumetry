@@ -52,6 +52,12 @@
   color: #333;
 }
 
+.form-group-checkbox {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0.25rem;
+}
+
 .form-control {
   width: 100%;
   padding: 0.25rem;

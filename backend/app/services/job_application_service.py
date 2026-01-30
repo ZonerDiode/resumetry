@@ -1,5 +1,4 @@
 from datetime import date, datetime
-from decimal import Decimal
 from typing import Any, cast
 from uuid import uuid4
 
@@ -55,8 +54,6 @@ def _deserialize_from_dynamo(item: dict[str, Any]) -> dict[str, Any]:
             continue
         if key in date_fields and isinstance(value, str):
             result[key] = date.fromisoformat(value)
-        elif key == 'interest_level' and isinstance(value, Decimal):
-            result[key] = int(value)
         elif key == 'notes' and isinstance(value, list):
             notes = cast(list[dict[str, Any]], value)
             result[key] = [

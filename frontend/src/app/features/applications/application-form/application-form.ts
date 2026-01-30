@@ -29,7 +29,7 @@ export class ApplicationFormComponent implements OnInit {
     role: ['', [Validators.required, Validators.maxLength(255)]],
     description: [''],
     salary: ['', Validators.maxLength(100)],
-    interestLevel: [2, [Validators.required, Validators.min(1), Validators.max(3)]],
+    topJob: [false],
     sourcePage: [''],
     reviewPage: [''],
     loginHints: [''],
@@ -69,7 +69,7 @@ export class ApplicationFormComponent implements OnInit {
           role: app.role,
           description: app.description,
           salary: app.salary,
-          interestLevel: app.interestLevel,
+          topJob: app.topJob,
           sourcePage: app.sourcePage,
           reviewPage: app.reviewPage,
           loginHints: app.loginHints,
@@ -175,7 +175,11 @@ export class ApplicationFormComponent implements OnInit {
   }
 
   private todayString(): string {
-    return new Date().toISOString().split('T')[0];
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
   
   private sortFormArray(formArray: FormArray, field: string): void {

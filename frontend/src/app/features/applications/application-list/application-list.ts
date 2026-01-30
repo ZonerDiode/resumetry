@@ -91,10 +91,6 @@ export class ApplicationListComponent implements OnInit {
     return colors[status];
   }
 
-  getInterestColor(level: number): string {
-    return level === 3 ? '#4caf50' : level === 2 ? '#ff9800' : '#9e9e9e';
-  }
-
   recruiterApplications = computed(() => {
     return this.displayedApplications().filter(app => !!app.recruiterName);
   });
