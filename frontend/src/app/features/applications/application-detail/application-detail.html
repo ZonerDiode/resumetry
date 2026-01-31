@@ -14,7 +14,7 @@
     <div class="page-header">
       <div>
         <h1>{{ app.company }}</h1>
-        <p class="role">{{ app.role }}</p>
+        <p class="subtitle">{{ app.role }}</p>
       </div>
 
       <div class="header-actions">
@@ -25,8 +25,8 @@
     </div>
 
     <div class="detail-content">
-      <div class="info-section">
-        <h3>Application Information</h3>
+      <div class="section-panel">
+        <h2>Application Information</h2>
 
         @if (app.topJob) {
           <div class="info-row">
@@ -60,8 +60,8 @@
         }
       </div>
 
-      <div class="info-section">
-        <h3>Status ({{ app.status.length }})</h3>
+      <div class="section-panel">
+        <h2>Status ({{ app.status.length }})</h2>
 
         @if (app.status.length === 0) {
           <p class="empty-notes">No status entries.</p>
@@ -84,8 +84,8 @@
         }
       </div>
 
-      <div class="info-section">
-        <h3>Additional Details</h3>
+      <div class="section-panel">
+        <h2>Additional Details</h2>
 
         @if (app.sourcePage) {
           <div class="info-row">
@@ -111,14 +111,14 @@
         @if (app.description) {
           <div class="description-block">
             <span class="label">Description:</span>
-            <div class="description-text" [innerHTML]="app.description"></div>
+            <div class="description-text rich-text" [innerHTML]="app.description"></div>
           </div>
         }
 
       </div>
 
-      <div class="info-section">
-        <h3>Notes ({{ app.notes.length }})</h3>
+      <div class="section-panel">
+        <h2>Notes ({{ app.notes.length }})</h2>
 
         @if (app.notes.length === 0) {
           <p class="empty-notes">No notes yet.</p>

@@ -1,16 +1,5 @@
-.form-section {
-  background: #CFE8FE;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 0.75rem;
+.section-panel.form-spacing {
   margin-bottom: 1rem;
-}
-
-.form-section h2 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-  color: #333;
 }
 
 .section-header {
@@ -28,10 +17,6 @@
 
 .form-group {
   margin-bottom: 0.5rem;
-}
-
-.form-group:last-child {
-  margin-bottom: 0;
 }
 
 .form-group label {
@@ -86,41 +71,11 @@
   pointer-events: none;
 }
 
-.content-editable h1,
-.content-editable h2,
-.content-editable h3,
-.content-editable h4,
-.content-editable h5,
-.content-editable h6 {
-  margin: 0.75rem 0 0.5rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-}
-
-.content-editable p { margin: 0.25rem 0; }
-
-.content-editable ul,
-.content-editable ol {
-  margin: 0.5rem 0;
-  padding-left: 1.5rem;
-}
-
-.content-editable li { margin-bottom: 0.25rem; }
-.content-editable a { color: #1976d2; text-decoration: underline; }
-
 .error-text {
   display: block;
   margin-top: 0.25rem;
   color: #f44336;
   font-size: 0.875rem;
-}
-
-.empty-notes {
-  color: #999;
-  text-align: center;
-  padding: 2rem;
-  margin: 0;
 }
 
 .detail-content {
@@ -130,24 +85,15 @@
   margin-bottom: 1rem;
 }
 
-.notes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
+/* Form-specific note overrides */
 .note-item {
   background: #f9f9f9;
   border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border-left: 1px solid #e0e0e0;
   padding: 0.5rem;
 }
 
 .note-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -155,21 +101,6 @@
 .note-number {
   font-weight: 600;
   color: #666;
-}
-
-.btn-remove {
-  background: #f44336;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.2s;
-}
-
-.btn-remove:hover {
-  background: #d32f2f;
 }
 
 .note-fields {
@@ -187,5 +118,4 @@
   .note-fields {
     grid-template-columns: 1fr;
   }
-
 }

@@ -23,34 +23,38 @@ ResumeTry is an Angular 20 web application with a FastAPI serverless backend usi
 ### Frontend Structure
 ```
 frontend/src/app/
-├── app.component.ts          # Root component
+├── app.ts                    # Root component
 ├── app.routes.ts             # Route definitions (provideRouter)
 ├── main.ts                   # Bootstrap with bootstrapApplication()
 ├── core/
 │   ├── models/               # Interfaces, enums, type definitions
 │   └── services/             # Injectable services (HttpClient, signals)
 └── features/
-    └── applications/         # Job application feature components
-        ├── application-list/
-        ├── application-detail/
-        └── application-form/
+    ├── applications/         # Job application feature components
+    │   ├── application-list/
+    │   ├── application-detail/
+    │   └── application-form/
+    └── reports/              # Report components
+        └── sankey-report/    
 ```
 
 ### Backend Structure
 ```
 backend/app/
-├── main.py              # FastAPI app + Lambda handler
-├── config.py            # Settings via pydantic-settings
+├── main.py                 # FastAPI app + Lambda handler
+├── config.py               # Settings via pydantic-settings
 ├── routers/
-│   ├── health.py        # GET /health
-│   └── api_v1.py        # GET /api/v1/ping
+│   ├── health.py           # GET /health
+│   └── api_v1.py           # GET /api/v1/ping
 ├── models/
-│   ├── base.py          # Base Pydantic schema
-│   ├── responses.py     # Response models
-│   ├── enums.py         # ApplicationStatus enum
+│   ├── base.py             # Base Pydantic schema
+│   ├── responses.py        # Response models
+│   ├── enums.py            # ApplicationStatus enum
 │   └── job_application.py  # Job application models
+├── services/
+│   └── job_application_service.py  # Job application service
 └── db/
-    └── dynamodb.py      # DynamoDB client and table setup
+    └── dynamodb.py         # DynamoDB client and table setup
 ```
 
 ### Key Configuration - Frontend

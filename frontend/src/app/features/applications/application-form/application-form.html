@@ -14,7 +14,7 @@
     </div>
 
     <!-- Basic Information Section -->
-    <div class="form-section">
+    <div class="section-panel form-spacing">
       <h2>Basic Information</h2>
 
       <div class="form-row">
@@ -110,7 +110,7 @@
     <div class="detail-content">
 
       <!-- Status History Section -->
-      <div class="form-section">
+      <div class="section-panel form-spacing">
         <div class="section-header">
           <h2>Status ({{ statusArray.length }})</h2>
           <button type="button" class="btn" (click)="addStatusItem()">+ Add</button>
@@ -151,7 +151,7 @@
       </div>
 
       <!-- Notes Section -->
-      <div class="form-section">
+      <div class="section-panel form-spacing">
         <div class="section-header">
           <h2>Notes ({{ notesArray.length }})</h2>
           <button type="button" class="btn" (click)="addNote()">+ Add</button>
@@ -196,7 +196,7 @@
     </div>
 
     <!-- Additional Links Section -->
-    <div class="form-section">
+    <div class="section-panel form-spacing">
       <h2>Additional Information</h2>
 
       <div class="form-group">
@@ -238,7 +238,7 @@
           id="description"
           appContentEditable
           formControlName="description"
-          class="form-control content-editable"
+          class="form-control content-editable rich-text"
           contenteditable="true"
         ></div>
       </div>
