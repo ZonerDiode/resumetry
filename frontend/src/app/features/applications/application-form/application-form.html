@@ -1,28 +1,15 @@
-<div class="form-container">
+<div class="page-container">
   <form [formGroup]="applicationForm" (ngSubmit)="onSave()">
 
-    <div class="form-header">
+    <div class="page-header">
       <div>
         <h1>{{ isEditMode ? 'Edit Application' : 'New Application' }}</h1>
       </div>
-
-      <!-- Form Actions -->
-      <div class="form-actions">
-        <button
-          type="submit"
-          class="btn btn-success"
-          [disabled]="isSaving"
-        >
+      <div class="header-actions">
+        <button type="submit" class="btn" [disabled]="isSaving">
           {{ isSaving ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
         </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="onCancel()"
-          [disabled]="isSaving"
-        >
-          Cancel
-        </button>
+        <button type="button" class="btn" (click)="onCancel()" [disabled]="isSaving">Cancel</button>
       </div>
     </div>
 
@@ -125,12 +112,12 @@
       <!-- Status History Section -->
       <div class="form-section">
         <div class="section-header">
-          <h2>Status History ({{ statusArray.length }})</h2>
-          <button type="button" class="btn btn-secondary" (click)="addStatusItem()">+ Add Status</button>
+          <h2>Status ({{ statusArray.length }})</h2>
+          <button type="button" class="btn" (click)="addStatusItem()">+ Add</button>
         </div>
 
         @if (statusArray.length === 0) {
-          <p class="empty-notes">No status entries. Click "Add Status" to create one.</p>
+          <p class="empty-notes">No status entries. Click "Add" to create one.</p>
         } @else {
           <div formArrayName="status" class="notes-list">
             @for (item of statusArray.controls; let i = $index; track i) {
@@ -167,11 +154,11 @@
       <div class="form-section">
         <div class="section-header">
           <h2>Notes ({{ notesArray.length }})</h2>
-          <button type="button" class="btn btn-secondary" (click)="addNote()">+ Add Note</button>
+          <button type="button" class="btn" (click)="addNote()">+ Add</button>
         </div>
 
         @if (notesArray.length === 0) {
-          <p class="empty-notes">No notes yet. Click "Add Note" to create one.</p>
+          <p class="empty-notes">No notes yet. Click "Add" to create one.</p>
         } @else {
           <div formArrayName="notes" class="notes-list">
             @for (note of notesArray.controls; let i = $index; track i) {

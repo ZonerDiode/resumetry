@@ -1,10 +1,10 @@
-<div class="report-container">
-  <div class="report-header">
+<div class="page-container">
+  <div class="page-header">
     <div>
       <h1>Application Status Flow</h1>
       <p class="subtitle">Sankey diagram of status transitions across {{ totalApplications() }} applications</p>
     </div>
-    <button type="button" class="btn btn-secondary" (click)="onBack()">← Back to Applications</button>
+    <button type="button" class="btn" (click)="onBack()">← Back to Applications</button>
   </div>
 
   @if (isLoading()) {
@@ -19,7 +19,7 @@
     @if (transitions().length === 0) {
       <div class="empty-state">
         <p>No status transitions found. Applications need at least two status entries to show transitions.</p>
-        <button type="button" class="btn btn-secondary" (click)="onBack()">Back to Applications</button>
+        <button type="button" class="btn" (click)="onBack()">Back to Applications</button>
       </div>
     } @else {
       <div class="sankey-chart" #chartContainer></div>

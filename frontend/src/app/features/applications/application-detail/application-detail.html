@@ -1,4 +1,4 @@
-<div class="detail-container">
+<div class="page-container">
   @if (isLoading()) {
     <div class="loading">Loading...</div>
   }
@@ -6,21 +6,21 @@
   @if (error()) {
     <div class="error">
       <p>{{ error() }}</p>
-      <button type="button" class="btn btn-secondary" (click)="onBack()">Back to List</button>
+      <button type="button" class="btn" (click)="onBack()">Back to List</button>
     </div>
   }
 
   @if (application(); as app) {
-    <div class="detail-header">
+    <div class="page-header">
       <div>
         <h1>{{ app.company }}</h1>
         <p class="role">{{ app.role }}</p>
       </div>
 
       <div class="header-actions">
-        <button type="button" class="btn btn-primary" (click)="onEdit()">Edit</button>
-        <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
-        <button type="button" class="btn btn-secondary" (click)="onBack()">Back</button>
+        <button type="button" class="btn" (click)="onEdit()">Edit</button>
+        <button type="button" class="btn" (click)="onDelete()">Delete</button>
+        <button type="button" class="btn" (click)="onBack()">Back</button>
       </div>
     </div>
 
@@ -61,10 +61,10 @@
       </div>
 
       <div class="info-section">
-        <h3>Status History ({{ app.status.length }})</h3>
+        <h3>Status ({{ app.status.length }})</h3>
 
         @if (app.status.length === 0) {
-          <p class="empty-notes">No status history.</p>
+          <p class="empty-notes">No status entries.</p>
         } @else {
           <div class="notes-list">
             @for (item of sortedStatus(app.status); track $index) {
@@ -121,7 +121,7 @@
         <h3>Notes ({{ app.notes.length }})</h3>
 
         @if (app.notes.length === 0) {
-          <p class="empty-notes">No notes yet. Click Edit to add notes.</p>
+          <p class="empty-notes">No notes yet.</p>
         } @else {
           <div class="notes-list">
             @for (note of sortedNotes(app.notes); track $index) {

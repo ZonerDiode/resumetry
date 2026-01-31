@@ -1,29 +1,3 @@
-.report-container {
-  max-width: 95%;
-  margin: 0 auto
-}
-
-.report-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  margin-bottom: 2rem;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.report-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2rem;
-  color: #333;
-}
-
-.subtitle {
-  margin: 0;
-  color: #666;
-  font-size: 0.95rem;
-}
-
 .sankey-chart {
   background: white;
   border: 1px solid #e0e0e0;
@@ -37,10 +11,6 @@
   text-align: center;
   padding: 3rem;
   font-size: 1.1rem;
-}
-
-.error {
-  color: #f44336;
 }
 
 .empty-state {

@@ -1,14 +1,13 @@
-<div class="applications-container">
-  <div class="filter-bar">
+<div class="page-container">
+  <div class="page-header">
     <div>
       <h1>Job Applications</h1>
       <p class="subtitle">Showing {{ displayedApplications().length }} most recent applications</p>
     </div>
 
-    <div class="filter-actions">
+    <div class="header-actions">
       <div class="view-toggle">
-        <button
-          type="button"
+        <button type="button"
           class="toggle-btn"
           [class.active]="viewMode() === 'table'"
           (click)="viewMode.set('table')"
@@ -55,8 +54,8 @@
         (input)="onFilterChange($event)"
         [value]="filterText()"
       />
-      <button type="button" class="btn btn-primary" (click)="onCreateNew()">+ New Application</button>
-      <button type="button" class="btn btn-secondary" (click)="onViewReports()">Reports</button>
+      <button type="button" class="btn" (click)="onCreateNew()">+ New Application</button>
+      <button type="button" class="btn" (click)="onViewReports()">Reports</button>
     </div>
   </div>
 
@@ -72,7 +71,7 @@
     @if (displayedApplications().length === 0) {
       <div class="empty-state">
         <p>No applications found.</p>
-        <button type="button" class="btn btn-primary" (click)="onCreateNew()">Create Your First Application</button>
+        <button type="button" class="btn" (click)="onCreateNew()">Create Your First Application</button>
       </div>
     } @else {
       @if (viewMode() === 'table') {
@@ -135,7 +134,7 @@
                     }
                   </td>
                 </tr>
-                <tr class="data-row">
+                <tr class="table-row">
                   <td class="top-job-star">@if (app.topJob) {&#9733;}</td>
                   <td class="col-company">{{ app.company }}</td>
                   <td>{{ app.role }}</td>
