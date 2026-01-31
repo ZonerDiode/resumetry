@@ -66,6 +66,10 @@ export class ApplicationListComponent implements OnInit {
     this.router.navigate(['/applications/new']);
   }
 
+  onViewReports(): void {
+    this.router.navigate(['/reports/sankey']);
+  }
+
   onFilterChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.filterText.set(input.value);
@@ -86,7 +90,7 @@ export class ApplicationListComponent implements OnInit {
       [ApplicationStatus.OFFER]: '#4caf50',
       [ApplicationStatus.REJECTED]: '#f44336',
       [ApplicationStatus.WITHDRAWN]: '#757575',
-      [ApplicationStatus.GHOSTED]: '#9e9e9e'
+      [ApplicationStatus.NOOFFER]: '#607d8b'
     };
     return colors[status];
   }

@@ -78,7 +78,7 @@ export class ApplicationDetailComponent implements OnInit {
       [ApplicationStatus.OFFER]: '#4caf50',
       [ApplicationStatus.REJECTED]: '#f44336',
       [ApplicationStatus.WITHDRAWN]: '#757575',
-      [ApplicationStatus.GHOSTED]: '#9e9e9e'
+      [ApplicationStatus.NOOFFER]: '#607d8b'
     };
     return colors[status];
   }

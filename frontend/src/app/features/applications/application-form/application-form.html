@@ -1,7 +1,31 @@
 <div class="form-container">
-  <h1>{{ isEditMode ? 'Edit Application' : 'New Application' }}</h1>
-
   <form [formGroup]="applicationForm" (ngSubmit)="onSave()">
+
+    <div class="form-header">
+      <div>
+        <h1>{{ isEditMode ? 'Edit Application' : 'New Application' }}</h1>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="isSaving"
+        >
+          {{ isSaving ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onCancel()"
+          [disabled]="isSaving"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+
     <!-- Basic Information Section -->
     <div class="form-section">
       <h2>Basic Information</h2>
@@ -231,25 +255,6 @@
           contenteditable="true"
         ></div>
       </div>
-    </div>
-
-    <!-- Form Actions -->
-    <div class="form-actions">
-      <button
-        type="submit"
-        class="btn btn-success"
-        [disabled]="isSaving"
-      >
-        {{ isSaving ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
-      </button>
-      <button
-        type="button"
-        class="btn btn-secondary"
-        (click)="onCancel()"
-        [disabled]="isSaving"
-      >
-        Cancel
-      </button>
     </div>
   </form>
 </div>
