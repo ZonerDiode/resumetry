@@ -100,15 +100,6 @@
 .company-name, .col-company { color: #1976d2; font-weight: 600; }
 .company-name { margin: 0; font-size: 1.25rem; }
 
-.interest-badge {
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  white-space: nowrap;
-  font-weight: 500;
-}
-
 .card-body { margin-bottom: 1rem; }
 .role { font-size: 1.1rem; font-weight: 500; margin: 0 0 0.5rem 0; color: #333; }
 .salary, .col-salary { color: #4caf50; font-weight: 500; }
